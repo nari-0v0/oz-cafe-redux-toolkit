@@ -14,17 +14,17 @@ function Cart() {
         메뉴 정보가 없어요!
       </div>
     );
-  const allMenus = [...menu.커피, ...menu.논커피];
+  const allMenus = Object.values(menu).flat();
   return (
     <>
       <h2>장바구니</h2>
       {cart.length > 0 ? (
         <ul className="cart">
-          {cart.map((el) => {
+          {cart.map((el, idx) => {
             const item = allMenus.find((m) => m.id === el.id);
             return (
               <CartItem
-                key={el.id}
+                key={`${el.id}-${idx}`}
                 item={item}
                 options={el.options}
                 quantity={el.quantity}
@@ -44,7 +44,7 @@ function Cart() {
   );
 }
 
-function CartItem({ item, options, quantity, onRemove }) {
+function CartItem({ item, options = {}, quantity, onRemove }) {
   return (
     <li className="cart-item">
       <div className="cart-item-info">
@@ -52,9 +52,9 @@ function CartItem({ item, options, quantity, onRemove }) {
         <div>{item.name}</div>
       </div>
       <div className="cart-item-option">
-        {Object.keys(options).map((el) => (
-          <div key={el.id}>
-            {el} : {data.options[el][options[el]]}
+        {Object.keys(options).map((optKey) => (
+          <div key={optKey}>
+            {optKey} : {data.options[optKey][options[optKey]]}
           </div>
         ))}
         <div>개수 : {quantity}</div>

@@ -2,12 +2,9 @@ import { useState } from 'react';
 import Item from './Item';
 import OrderModal from './OrderModal';
 import { useSelector } from 'react-redux';
-import { useDispatch } from 'react-redux';
-import { addToCart } from '../redux/cartSlice';
 
 function Menu() {
   const menu = useSelector((state) => state.menu.list);
-  const dispatch = useDispatch();
   const [modalOn, setModalOn] = useState(false);
   const [modalMenu, setModalMenu] = useState(null);
 
@@ -33,7 +30,6 @@ function Menu() {
                   item={item}
                   clickHandler={() => {
                     setModalMenu(item);
-                    dispatch(addToCart({ ...item, quantity: 1 }));
                     setModalOn(true);
                   }}
                 />

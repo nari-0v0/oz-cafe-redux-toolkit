@@ -2,7 +2,7 @@ import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 function Header() {
-  const cartCount = useSelector((state) => state.cart.tiems.length);
+  const cartCount = useSelector((state) => state.cart?.items?.length ?? 0);
   return (
     <header>
       <h1>☕ 오즈 카페</h1>
